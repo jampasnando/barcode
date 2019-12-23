@@ -11,4 +11,9 @@
     The world is your oyster.
     <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
   </div>
+  <ion-searchbar [(ngModel)]="buscar" ></ion-searchbar>
+  <ion-button (click)="buscaprod()">buscar</ion-button>
+  <ion-button (click)="scanear()">Scan</ion-button>
+  <ion-button (click)="listaprods()">Listar</ion-button>
+  <ion-button (click)="mostrardetalle()">Modal</ion-button>
 </ion-content>

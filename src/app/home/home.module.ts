@@ -5,12 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductosService } from '../service/productos.service';
+import { DetallePage } from './detalle/detalle.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    HttpClientModule,
     RouterModule.forChild([
       {
         path: '',
@@ -18,6 +22,8 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  entryComponents:[DetallePage],
+  declarations: [HomePage,DetallePage],
+  providers:[ProductosService,DetallePage]
 })
 export class HomePageModule {}
