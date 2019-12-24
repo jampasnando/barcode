@@ -1,19 +1,21 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar mode="ios">
     <ion-title>
-      Ionic Blank
+      TEST SCAN
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
-  <ion-searchbar [(ngModel)]="buscar" ></ion-searchbar>
-  <ion-button (click)="buscaprod()">buscar</ion-button>
-  <ion-button (click)="scanear()">Scan</ion-button>
-  <ion-button (click)="listaprods()">Listar</ion-button>
-  <ion-button (click)="mostrardetalle()">Modal</ion-button>
+  <!-- <ion-searchbar [(ngModel)]="buscar" ></ion-searchbar> -->
+  
+  <ion-footer class="pie">
+    <div class="menudiv">
+      <ion-button color="dark" expand="block" routerLink="/inicio"><ion-icon name="home"></ion-icon></ion-button>
+      <ion-button color="dark" expand="block" routerLink="/lista"><ion-icon name="search"></ion-icon></ion-button>
+      <ion-button color="dark" expand="block" routerLink="/sync"><ion-icon name="sync"></ion-icon></ion-button>
+      <ion-button color="dark" expand="block" routerLink="/nuevo"><ion-icon name="add-circle"></ion-icon></ion-button>
+      <ion-button color="dark" expand="block" routerLink="/home"><ion-icon name="qr-scanner"></ion-icon></ion-button>
+    </div>
+    </ion-footer>
 </ion-content>

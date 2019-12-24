@@ -15,6 +15,14 @@ export class HomePage {
   aux:any;
   public buscar:string="";
   constructor(private barcode:BarcodeScanner,private consultas:ProductosService,private alertCtrl:AlertController,private modalCtrl:ModalController) {}
+  ngOnInit(){
+    this.scanear();
+    this.listaprods();
+   
+  }
+  onViewEnter(){
+    
+  }
   scanear(){
     console.log("entra");
     this.barcode.scan().then(dato=>{

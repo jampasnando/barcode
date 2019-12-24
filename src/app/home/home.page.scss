@@ -1,1 +1,11 @@
 
+.menudiv{
+    display: flex;
+    background-color: black;
+    justify-content: space-between;
+}
+
+.pie{
+    position: absolute;
+    bottom: 0;
+}

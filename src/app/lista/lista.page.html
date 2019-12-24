@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <!-- <ion-title>LISTADO:</ion-title> -->
+    <ion-buttons slot="end">
+        <div class="filtros">
+          <ion-button size="small" color="{{pordesc}}" (click)="criterio('descripcion')" >desc</ion-button>
+          <ion-button size="small" color="{{porsap}}"  (click)="criterio('codigoSap')" >sap</ion-button>
+          <ion-button size="small" color="{{porean}}"  (click)="criterio('ean13')" >ean</ion-button>
+          <ion-button size="small" color="{{pordun}}"  (click)="criterio('dun14')" >dun</ion-button>
+        </div>
+        <ion-button routerLink="/home">
+          <ion-icon name="home"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" #buscador (click)="clickbuscador($event)" mode="ios"></ion-searchbar>
+    <ion-virtual-scroll [items]="lista">
+        <ion-item-sliding *virtualItem="let unitem" >
+          <ion-item>
+            <ion-label>
+              <h4><ion-icon name="cube" class="persona"></ion-icon> {{unitem.descripcion}}</h4>
+              <p>id: {{unitem.id}} | sap: {{unitem.codigoSap}}</p>
+              <p>ean13: {{unitem.ean13}} | dun14: {{unitem.dun14}}</p>
+            </ion-label>
+            <!-- <div class="divmarcador" slot="end" (click)="vecheck($event,unitem)" *ngIf="unitem.marcador==''">{{unitem.marcador}}</div>
+            <div class="divmarcador fondomarcador" slot="end" (click)="vecheck($event,unitem)" *ngIf="unitem.marcador!=''">{{unitem.marcador}}</div> -->
+          </ion-item>
+        </ion-item-sliding>  
+    </ion-virtual-scroll>
+    <ion-footer class="pie">
+      <div class="menudiv">
+        <ion-button color="dark" expand="block" routerLink="/inicio"><ion-icon name="home"></ion-icon></ion-button>
+        <ion-button color="dark" expand="block" routerLink="/lista"><ion-icon name="search"></ion-icon></ion-button>
+        <ion-button color="dark" expand="block" routerLink="/sync"><ion-icon name="sync"></ion-icon></ion-button>
+        <ion-button color="dark" expand="block" routerLink="/nuevo"><ion-icon name="add-circle"></ion-icon></ion-button>
+        <ion-button color="dark" expand="block" routerLink="/home"><ion-icon name="qr-scanner"></ion-icon></ion-button>
+      </div>
+      </ion-footer>
+</ion-content>
