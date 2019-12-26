@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductosService } from '../service/productos.service';
 import { AlertController,IonSearchbar } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { File, FileReader } from '@ionic-native/file/ngx';
 @Component({
   selector: 'app-lista',
   templateUrl: './lista.page.html',
@@ -25,17 +26,31 @@ export class ListaPage implements OnInit {
   pordun="medium";
   activo="descripcion";
   // tiqueador=GLOBAL.usuarionombre;
-  constructor(private consultas: ProductosService, private alertCtrl:AlertController, private activatedRoute:ActivatedRoute,private router:Router) {
+  constructor(private consultas: ProductosService, private alertCtrl:AlertController, private activatedRoute:ActivatedRoute,private router:Router,private file:File) {
     
    }
 
   ngOnInit() {
-    // console.log("tiqueador",this.tiqueador);
-    // this.idreunion=this.activatedRoute.snapshot.paramMap.get("idreunion");
-    // this.nrotiq=this.activatedRoute.snapshot.paramMap.get("nrotiq");
+    // this.file.writeFile(this.file.dataDirectory, 'lista.txt', 'hello world', {replace: true}).then((entry:any) => {console.log('creado')}).catch(err => console.log('no creado'));
+
+
     this.consultaConvocados();
     
   }
+  generafile(lista){
+    this.file.writeFile(this.file.dataDirectory, 'lista.txt', lista, {replace: true}).then(_ => console.log('creado')).catch(err => console.log('no creado'));
+  }
+  leefile(){
+    this.file.readAsText(this.file.dataDirectory, 'lista.txt').then(datos=>{
+      // console.log("tamano: ",datos.length);
+      console.log("leido: ",datos);
+      this.lista=JSON.parse(datos);
+      this.lista2=this.lista;
+    }).catch(error=>{
+      console.log("error en leer");
+    });
+  }
+
   consultaConvocados(){
     this.consultas.obtieneproductos().subscribe((datax:any)=>{
       for(let uno of datax.materiales){
@@ -50,13 +65,14 @@ export class ListaPage implements OnInit {
       };
       
       this.lista=data.sort(sortByProperty('descripcion'));
-      // for(let xx of this.lista){
-      //   xx.marcador="";
-      //   xx.hora_registro=JSON.parse(xx.hora_registro);
-      // }
-      // console.log("lista: ",this.lista);
-      this.lista2=this.lista;
-    });
+      this.generafile(this.lista);
+      
+    },
+    (err)=>{
+      alert("trabajará sin conexión");
+      this.leefile();
+    }
+    );
   }
   onViewCanLeave(){
     console.log("onviecanleave");
