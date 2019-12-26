@@ -7,16 +7,26 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-searchbar [(ngModel)]="buscar" ></ion-searchbar> -->
-  
-  <ion-footer class="pie">
-    <div class="menudiv">
-      <ion-button color="dark" expand="block" routerLink="/inicio"><ion-icon name="home"></ion-icon></ion-button>
-      <ion-button color="dark" expand="block" routerLink="/lista"><ion-icon name="search"></ion-icon></ion-button>
-      <ion-button color="dark" expand="block" routerLink="/sync"><ion-icon name="sync"></ion-icon></ion-button>
-      <ion-button color="dark" expand="block" routerLink="/nuevo"><ion-icon name="add-circle"></ion-icon></ion-button>
-      <ion-button color="dark" expand="block" routerLink="/inventario"><ion-icon name="clipboard"></ion-icon></ion-button>
-      <ion-button color="dark" expand="block" routerLink="/home"><ion-icon name="qr-scanner"></ion-icon></ion-button>
-    </div>
-    </ion-footer>
+    <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" #buscador (click)="clickbuscador($event)" mode="ios"></ion-searchbar> -->
+    <ion-virtual-scroll [items]="listax">
+        <ion-item-sliding *virtualItem="let unitem" >
+          <ion-item>
+            <ion-label>
+              <h4><ion-icon name="cube" class="persona"></ion-icon> {{unitem.descripcion}}</h4>
+              <p>id: {{unitem.id}} | sap: {{unitem.codigoSap}}</p>
+              <p>ean13: {{unitem.ean13}} | dun14: {{unitem.dun14}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>  
+    </ion-virtual-scroll>
+    <ion-footer class="pie">
+      <div class="menudiv">
+        <ion-button color="dark" expand="block" routerLink="/inicio"><ion-icon name="home"></ion-icon></ion-button>
+        <ion-button color="dark" expand="block" routerLink="/lista"><ion-icon name="search"></ion-icon></ion-button>
+        <ion-button color="dark" expand="block" routerLink="/sync"><ion-icon name="sync"></ion-icon></ion-button>
+        <ion-button color="dark" expand="block" routerLink="/nuevo"><ion-icon name="add-circle"></ion-icon></ion-button>
+        <ion-button color="dark" expand="block" routerLink="/inventario"><ion-icon name="clipboard"></ion-icon></ion-button>
+        <ion-button color="dark" expand="block" (click)="scanear()"><ion-icon name="qr-scanner"></ion-icon></ion-button>
+      </div>
+      </ion-footer>
 </ion-content>

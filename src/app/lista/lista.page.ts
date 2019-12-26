@@ -34,7 +34,7 @@ export class ListaPage implements OnInit {
     // this.file.writeFile(this.file.dataDirectory, 'lista.txt', 'hello world', {replace: true}).then((entry:any) => {console.log('creado')}).catch(err => console.log('no creado'));
 
 
-    this.consultaConvocados();
+    this.listaprods();
     
   }
   generafile(lista){
@@ -51,7 +51,7 @@ export class ListaPage implements OnInit {
     });
   }
 
-  consultaConvocados(){
+  listaprods(){
     this.consultas.obtieneproductos().subscribe((datax:any)=>{
       for(let uno of datax.materiales){
         uno.descripcion=uno.descripcion.trim();

@@ -19,8 +19,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="generafile()">crearfile</ion-button>
-  <ion-button (click)="leefile()">leefile</ion-button>
+  <!-- <ion-button (click)="generafile()">crearfile</ion-button>
+  <ion-button (click)="leefile()">leefile</ion-button> -->
     <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" #buscador (click)="clickbuscador($event)" mode="ios"></ion-searchbar>
     <ion-virtual-scroll [items]="lista">
         <ion-item-sliding *virtualItem="let unitem" >
