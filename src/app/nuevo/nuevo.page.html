@@ -1,10 +1,83 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>nuevo</ion-title>
+  <ion-toolbar mode="ios">
+    <ion-title>Nuevo Item</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="formulario">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">id</ion-label>
+        <ion-input formControlName="nombre" type="text" autocapitalize="sentences"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">codigoSap</ion-label>
+        <ion-input formControlName="lugar" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Descripcion</ion-label>
+        <ion-input formControlName="descripcion" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">ean13</ion-label>
+        <ion-input formControlName="ean13" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">dun14</ion-label>
+        <ion-input formControlName="dun14" type="text"></ion-input>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label >Fecha</ion-label>
+        <ion-datetime displayFormat="DD MMMM YYYY" max="2030-12-31" min="2019-01-01" formControlName="fecha" picker-format="DD/MMM/YYYY"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label >Hora Inicio</ion-label>
+        <ion-datetime displayFormat="HH:mm" minuteValues="0,15,30,45" formControlName="horainicio"></ion-datetime>
+      </ion-item>
+      <ion-item>
+          <ion-label >Duración</ion-label>
+          <ion-select formControlName="duracion">
+            <ion-select-option>30mins</ion-select-option>
+            <ion-select-option>1hora</ion-select-option>
+            <ion-select-option>2horas</ion-select-option>
+            <ion-select-option>3horas</ion-select-option>
+            <ion-select-option>media jornada</ion-select-option>
+            <ion-select-option>todo el día</ion-select-option>
+            <ion-select-option>por tiempo y materia</ion-select-option>
+            <ion-select-option>indefinida</ion-select-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>Número de Tiqueos</ion-label>
+          <ion-select formControlName="tiqueos">
+            <ion-select-option value="1">1 Tiqueo</ion-select-option>
+            <ion-select-option value="2">2 Tiqueos</ion-select-option>
+            <ion-select-option value="3">3 Tiqueos</ion-select-option>
+            <ion-select-option value="4">4 Tiqueos</ion-select-option>
+            <ion-select-option value="5">5 Tiqueos</ion-select-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Instrucciones</ion-label>
+          <ion-input formControlName="instrucciones" type="text"></ion-input>
+        </ion-item>
+        <ion-item hidden>
+            <ion-label position="floating">Documentos adjuntos</ion-label>
+            <ion-input formControlName="docs" type="text"></ion-input>
+        </ion-item> -->
+        <ion-item>
+            <ion-label >Estado</ion-label>
+            <ion-select formControlName="estado">
+              <ion-select-option>Bueno</ion-select-option>
+              <ion-select-option>Regular</ion-select-option>
+              <ion-select-option>Malo</ion-select-option>
+              
+            </ion-select>
+          </ion-item>
+    </ion-list>
+    <ion-button expand="full" (click)="enviaForm()" [disabled]="!formulario.valid">Guardar Cambios</ion-button>
+  </form>
   <ion-footer class="pie">
     <div class="menudiv">
       <ion-button color="dark" expand="block" routerLink="/inicio"><ion-icon name="home"></ion-icon></ion-button>

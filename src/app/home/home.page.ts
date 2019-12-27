@@ -4,6 +4,8 @@ import { IonSearchbar, AlertController, ModalController } from '@ionic/angular';
 import { ProductosService } from '../service/productos.service';
 import { DetallePage } from './detalle/detalle.page';
 import { File } from '@ionic-native/file/ngx';
+import { GLOBAL } from '../service/global';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -16,15 +18,16 @@ export class HomePage {
   aux:any;
   lista:any;
   lista2:any;
-  listax:any;
+  listax:any=[];
   detalle:string;
   public buscar:string="";
-  constructor(private barcode:BarcodeScanner,private consultas:ProductosService,private alertCtrl:AlertController,private modalCtrl:ModalController,private file:File) {}
+  constructor(private barcode:BarcodeScanner,private consultas:ProductosService,private alertCtrl:AlertController,private modalCtrl:ModalController,private file:File,private router:Router) {}
   ngOnInit(){
     
     this.listaprods();
    
   }
+
   scanear(){
     console.log("entra");
     this.barcode.scan().then(dato=>{
@@ -62,6 +65,7 @@ listaprods(){
     };
     
     this.lista=data.sort(sortByProperty('descripcion'));
+    this.lista2=this.lista;
     this.generafile(this.lista);
     this.scanear();
     
@@ -80,6 +84,10 @@ listaprods(){
     this.listax=this.filtrador(texto);
     if(this.listax.length==0){
       alert("No encontrado");
+      this.scanear();
+    }
+    else{
+      this.vecheck(this.listax[0]);
     }
     
   }
@@ -89,5 +97,22 @@ listaprods(){
         return item.ean13.toLowerCase().indexOf(semilla.toLowerCase())==0;
     });
   }
- 
+  vecheck(unitem){
+    var bandera="noexiste";
+    var obj;
+    for(let aux of GLOBAL){
+      if(aux.ean13==unitem.ean13){
+        bandera="siexiste";
+        obj=aux;
+      }
+    }
+    if(bandera=="siexiste"){
+      obj.cant++;
+    }
+    else{
+      const nuevo={id: unitem.id, codigoSap: unitem.codigoSap, descripcion: unitem.descripcion, ean13: unitem.ean13, dun14: unitem.dun14,cant:1};
+      GLOBAL.push(nuevo);
+    }
+    this.router.navigateByUrl("/inventario");
+  }
 }

@@ -8,7 +8,7 @@
 
 <ion-content>
     <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" #buscador (click)="clickbuscador($event)" mode="ios"></ion-searchbar> -->
-    <ion-virtual-scroll [items]="listax">
+    <!-- <ion-virtual-scroll [items]="listax">
         <ion-item-sliding *virtualItem="let unitem" >
           <ion-item>
             <ion-label>
@@ -16,9 +16,10 @@
               <p>id: {{unitem.id}} | sap: {{unitem.codigoSap}}</p>
               <p>ean13: {{unitem.ean13}} | dun14: {{unitem.dun14}}</p>
             </ion-label>
+            <div class="divmarcador" slot="end"><ion-button (click)="vecheck(unitem)"><ion-icon name="add" ></ion-icon></ion-button></div>
           </ion-item>
         </ion-item-sliding>  
-    </ion-virtual-scroll>
+    </ion-virtual-scroll> -->
     <ion-footer class="pie">
       <div class="menudiv">
         <ion-button color="dark" expand="block" routerLink="/inicio"><ion-icon name="home"></ion-icon></ion-button>

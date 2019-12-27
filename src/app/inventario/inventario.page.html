@@ -1,10 +1,26 @@
 <ion-header>
   <ion-toolbar mode="ios">
     <ion-title>INVENTARIO</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="subir()"><ion-icon name="cloud-upload"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-virtual-scroll [items]="aux">
+    <ion-item-sliding *virtualItem="let unitem" >
+      <ion-item>
+        <ion-label>
+          <h4><ion-icon name="cube" class="persona"></ion-icon> {{unitem.descripcion}}</h4>
+          <p>id: {{unitem.id}} | sap: {{unitem.codigoSap}}</p>
+          <p>ean13: {{unitem.ean13}} | dun14: {{unitem.dun14}} | nro: {{unitem.cant}}</p>
+        </ion-label>
+        <!-- <div class="divmarcador" slot="end" (click)="vecheck($event,unitem)" *ngIf="unitem.marcador==''">{{unitem.marcador}}</div>
+        <div class="divmarcador fondomarcador" slot="end" (click)="vecheck($event,unitem)" *ngIf="unitem.marcador!=''">{{unitem.marcador}}</div> -->
+      </ion-item>
+    </ion-item-sliding>  
+</ion-virtual-scroll>
   <ion-footer class="pie">
     <div class="menudiv">
       <ion-button color="dark" expand="block" routerLink="/inicio"><ion-icon name="home"></ion-icon></ion-button>

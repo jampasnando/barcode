@@ -3,6 +3,7 @@ import { ProductosService } from '../service/productos.service';
 import { AlertController,IonSearchbar } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { File, FileReader } from '@ionic-native/file/ngx';
+import { GLOBAL } from '../service/global';
 @Component({
   selector: 'app-lista',
   templateUrl: './lista.page.html',
@@ -38,7 +39,7 @@ export class ListaPage implements OnInit {
     
   }
   generafile(lista){
-    this.file.writeFile(this.file.dataDirectory, 'lista.txt', lista, {replace: true}).then(_ => console.log('creado')).catch(err => console.log('no creado'));
+    // this.file.writeFile(this.file.dataDirectory, 'lista.txt', lista, {replace: true}).then(_ => console.log('creado')).catch(err => console.log('no creado'));
   }
   leefile(){
     this.file.readAsText(this.file.dataDirectory, 'lista.txt').then(datos=>{
@@ -59,14 +60,14 @@ export class ListaPage implements OnInit {
       var data=datax.materiales;
       console.log("datoslista : ",data);
       var sortByProperty = function (property) {
-        return function (x, y) {
+        return function (x, y) {  
             return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
         };
       };
       
       this.lista=data.sort(sortByProperty('descripcion'));
       this.generafile(this.lista);
-      
+      this.lista2=this.lista;
     },
     (err)=>{
       alert("trabajará sin conexión");
@@ -76,6 +77,23 @@ export class ListaPage implements OnInit {
   }
   onViewCanLeave(){
     console.log("onviecanleave");
+  }
+  vecheck(unitem){
+    var bandera="noexiste";
+    var obj;
+    for(let aux of GLOBAL){
+      if(aux.ean13==unitem.ean13){
+        bandera="siexiste";
+        obj=aux;
+      }
+    }
+    if(bandera=="siexiste"){
+      obj.cant++;
+    }
+    else{
+      const nuevo={id: unitem.id, codigoSap: unitem.codigoSap, descripcion: unitem.descripcion, ean13: unitem.ean13, dun14: unitem.dun14,cant:1};
+      GLOBAL.push(nuevo);
+    }
   }
   // vecheck(item,unemp){
   //   console.log(item.srcElement);
@@ -128,10 +146,11 @@ export class ListaPage implements OnInit {
     this.lista = this.filterItems(this.searchTerm);
   }
   filterItems(searchTerm) {
-    // console.log("activo: ",this.activo," buscar: ",searchTerm);
+    console.log("activo: ",this.activo," buscar: ",searchTerm);
     if(searchTerm!=""){
       return this.lista2.filter(item => {
        if(this.activo=="descripcion" && item.descripcion!=null){
+        //  console.log("dentro filtro: ",item.descripcion);
         return item.descripcion.toLowerCase().indexOf(searchTerm.toLowerCase()) >=0;
        }
        if(this.activo=="codigoSap" && item.codigoSap!=null){
