@@ -16,6 +16,7 @@
           <p>id: {{unitem.id}} | sap: {{unitem.codigoSap}}</p>
           <p>ean13: {{unitem.ean13}} | dun14: {{unitem.dun14}} | nro: {{unitem.cant}}</p>
         </ion-label>
+        <div class="divmarcador" slot="end"><ion-button (click)="foto(unitem)"><ion-icon name="camera" ></ion-icon></ion-button></div>
         <!-- <div class="divmarcador" slot="end" (click)="vecheck($event,unitem)" *ngIf="unitem.marcador==''">{{unitem.marcador}}</div>
         <div class="divmarcador fondomarcador" slot="end" (click)="vecheck($event,unitem)" *ngIf="unitem.marcador!=''">{{unitem.marcador}}</div> -->
       </ion-item>

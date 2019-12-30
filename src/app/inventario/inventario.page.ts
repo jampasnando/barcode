@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GLOBAL } from '../service/global';
 import { Router } from '@angular/router';
+import { Camera, CameraOptions, DestinationType, EncodingType, MediaType } from '@ionic-native/camera/ngx';
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.page.html',
@@ -8,8 +9,15 @@ import { Router } from '@angular/router';
 })
 export class InventarioPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,camera:Camera) { }
   aux:any=GLOBAL;
+  camopt:CameraOptions={
+    quality:20,
+    destinationType:DestinationType.DATA_URL,
+    encodingType:EncodingType.JPEG,
+    mediaType:MediaType.PICTURE
+
+  }
   ngOnInit() {
     
   }
@@ -25,5 +33,7 @@ export class InventarioPage implements OnInit {
 
     }
   }
-
+  foto(item){
+    console.log(item);
+  }
 }

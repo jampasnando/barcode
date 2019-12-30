@@ -12,7 +12,7 @@ import { GLOBAL } from '../service/global';
 export class ListaPage implements OnInit {
   @ViewChild("buscador",{static: true}) private buscador:IonSearchbar;
   // idreunion:string;
-  lista:any;
+  lista:any=[];
   lista2:any;
   tiempo:Date;
   // marca:string;

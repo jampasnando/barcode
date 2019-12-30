@@ -16,7 +16,7 @@ export class HomePage {
   opciones:BarcodeScannerOptions;
   mat:any;
   aux:any;
-  lista:any;
+  lista:any=[];
   lista2:any;
   listax:any=[];
   detalle:string;
@@ -24,10 +24,12 @@ export class HomePage {
   constructor(private barcode:BarcodeScanner,private consultas:ProductosService,private alertCtrl:AlertController,private modalCtrl:ModalController,private file:File,private router:Router) {}
   ngOnInit(){
     
-    this.listaprods();
+    
    
   }
-
+ionViewDidEnter(){
+  this.listaprods();
+}
   scanear(){
     console.log("entra");
     this.barcode.scan().then(dato=>{
@@ -52,6 +54,7 @@ leefile(){
 }
 
 listaprods(){
+ if(!(this.lista.length>0)){
   this.consultas.obtieneproductos().subscribe((datax:any)=>{
     for(let uno of datax.materiales){
       uno.descripcion=uno.descripcion.trim();
@@ -77,6 +80,7 @@ listaprods(){
     
   }
   );
+ }
 }
 
   buscaprod(texto){
