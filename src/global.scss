@@ -29,3 +29,17 @@ div[role=dialog]{
     height: 70% !important;
     border-radius: 10px 10px !important;
 }
+ion-toast.miclase {
+    --border-radius: 20px;
+    --border-width: 5px;
+    --border-style: double;
+    --border-color: var(--ion-color-info);
+    --background:lightseagreen;
+}
+ion-alert.miclase {
+    --border-radius: 20px;
+    --border-width: 5px;
+    --border-style: double;
+    --border-color: var(--ion-color-info);
+    // --background:lightseagreen;
+}

@@ -3,6 +3,7 @@
     <ion-title>INVENTARIO</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="subir()"><ion-icon name="cloud-upload"></ion-icon></ion-button>
+      
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -10,11 +11,29 @@
 <ion-content>
   <ion-virtual-scroll [items]="aux">
     <ion-item-sliding *virtualItem="let unitem" >
+      <ion-item-options side="start">
+        <ion-item-option color="primary" >
+            Detalles
+          </ion-item-option>
+      <ion-item-option color="secondary">
+        Editar
+      </ion-item-option>
+      
+    </ion-item-options>
+    <ion-item-options side="end">  
+      <ion-item-option color="secondary">
+            Compartir
+        </ion-item-option>
+        <ion-item-option color="danger">
+          Eliminar
+        </ion-item-option>
+    </ion-item-options>
       <ion-item>
         <ion-label>
           <h4><ion-icon name="cube" class="persona"></ion-icon> {{unitem.descripcion}}</h4>
           <p>id: {{unitem.id}} | sap: {{unitem.codigoSap}}</p>
-          <p>ean13: {{unitem.ean13}} | dun14: {{unitem.dun14}} | nro: {{unitem.cant}}</p>
+          <p>ean13: {{unitem.ean13}} | dun14: {{unitem.dun14}}</p>
+          <ion-badge color="secondary">{{unitem.cant}}</ion-badge>
         </ion-label>
         <div class="divmarcador" slot="end"><ion-button (click)="foto(unitem)"><ion-icon name="camera" ></ion-icon></ion-button></div>
         <!-- <div class="divmarcador" slot="end" (click)="vecheck($event,unitem)" *ngIf="unitem.marcador==''">{{unitem.marcador}}</div>
@@ -27,10 +46,10 @@
     <div class="menudiv">
       <ion-button color="dark" expand="block" routerLink="/inicio"><ion-icon name="home"></ion-icon></ion-button>
       <ion-button color="dark" expand="block" routerLink="/lista"><ion-icon name="search"></ion-icon></ion-button>
-      <ion-button color="dark" expand="block" routerLink="/sync"><ion-icon name="sync"></ion-icon></ion-button>
+      <ion-button color="secondary" expand="block" routerLink="/sync"><ion-icon name="analytics"></ion-icon></ion-button>
       <ion-button color="dark" expand="block" routerLink="/nuevo"><ion-icon name="add-circle"></ion-icon></ion-button>
       <ion-button color="dark" expand="block" routerLink="/inventario"><ion-icon name="clipboard"></ion-icon></ion-button>
-      <ion-button color="dark" expand="block" routerLink="/home"><ion-icon name="qr-scanner"></ion-icon></ion-button>
+      <ion-button color="danger" expand="block" routerLink="/home"><ion-icon name="qr-scanner"></ion-icon></ion-button>
     </div>
     </ion-footer>
 </ion-content>

@@ -14,3 +14,9 @@ p{
 ion-img{
     width: 200px;
 }
+ion-toast.miclase {
+    --border-radius: 20px;
+    --border-width: 5px;
+    --border-style: double;
+    --border-color: var(--ion-color-info);
+}

@@ -5,6 +5,7 @@ import { Camera, CameraOptions, DestinationType, EncodingType, MediaType } from 
 import { File } from '@ionic-native/file/ngx';
 import { Storage } from '@ionic/storage';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { ToastController, AlertController } from '@ionic/angular';
 const STORAGE_KEY="misimagenes";
 @Component({
   selector: 'app-inventario',
@@ -13,7 +14,7 @@ const STORAGE_KEY="misimagenes";
 })
 export class InventarioPage implements OnInit {
 
-  constructor(private router:Router,private camera:Camera, private file:File,public storage:Storage,private webview:WebView) { }
+  constructor(private router:Router,private camera:Camera, private file:File,public storage:Storage,private webview:WebView,private alerta:AlertController) { }
   aux:any=GLOBAL;
   archivo:any;
   arr:[];
@@ -32,14 +33,31 @@ export class InventarioPage implements OnInit {
   onViewEnter(){
     this.aux=GLOBAL;
   }
-  subir(){
-    if(confirm("Se subirá el registro de inventario actual")){
-      alert("Subida exitosa");
-      GLOBAL.length=0;
-      this.aux.length=0;
-      this.router.navigateByUrl("/inicio");
+  async subir(){
+    const miaviso=await this.alerta.create({
+      header:"SE SUBIRÁ AL SERVER",
+      message:"está seguro?",
+      cssClass:"miclase",
+      buttons:[
+        {
+          text:"Aceptar",
 
-    }
+        },
+        {
+          text:"Cancelar",
+          role:"cancel",
+        }
+      ]
+      
+    });
+    miaviso.present();
+    // if(confirm("Se subirá el registro de inventario actual")){
+    //   alert("Subida exitosa");
+    //   GLOBAL.length=0;
+    //   this.aux.length=0;
+    //   this.router.navigateByUrl("/inicio");
+
+    // }
   }
   foto(item){
     console.log(item);
@@ -82,7 +100,7 @@ export class InventarioPage implements OnInit {
       alert("error camara");
     }
     );
-    
-
   }
+  
+  
 }

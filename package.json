@@ -33,6 +33,7 @@
     "cordova-plugin-file": "^6.0.2",
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
+    "ngx-image-cropper": "^2.0.3",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",

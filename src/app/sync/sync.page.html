@@ -1,17 +1,76 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>sync</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="captureImage()" size="small">Cargar Foto</ion-button>
+    </ion-col>
+    <ion-col>
+      W: <ion-input [(ngModel)]="metrosancho" (change)="calculaarea()"></ion-input>
+    </ion-col>
+    <ion-col>
+      H: <ion-input [(ngModel)]="metrosalto" (change)="calculaarea()"></ion-input>
+    </ion-col>
+    <ion-col>
+      A: <ion-input [(ngModel)]="metrosarea" disabled="true"></ion-input>
+    </ion-col>
+  </ion-row>
+  <image-cropper
+  [imageBase64]="myImage"
+  [maintainAspectRatio]="false"
+  format="png"
+  (imageCropped)="imageCropped($event)"
+  outputType="Base64"
+  ></image-cropper>
+<div>
+ <!-- <ion-button (click)="rotateLeft()">rotIzq</ion-button>
+ <ion-button (click)="rotateRight()">rotDer</ion-button>
+ <ion-button (click)="flipHorizontal()">flipH</ion-button>
+ <ion-button (click)="flipVertical()">flipV</ion-button>
+ <ion-button (click)="move(0,-10)">mov</ion-button>
+ <ion-button (click)="save()">Guardar</ion-button>
+ <ion-button (click)="clear()">Limpia</ion-button> 
+ <ion-button (click)="accion()">accion</ion-button>-->
+ <ion-input [(ngModel)]="porcx" disabled="true"></ion-input>
+ <ion-row>
+   <ion-col>
+    <ion-button (click)="ponerect()" size="small">Sumar area</ion-button>
+   </ion-col>
+   <ion-col>
+     <ion-input [(ngModel)]="total" disabled="true"></ion-input>
+   </ion-col>
+   <ion-col>
+    <ion-input [(ngModel)]="totmetros" disabled="true"></ion-input>
+  </ion-col>
+ </ion-row>
+ <!-- <ion-button (click)="ponerect()">Fija area</ion-button> -->
+ 
+</div>
+<div>
+ <img [src]="croppedImage" hidden>
+</div>
+  <!-- <ion-card *ngIf="croppedImage">
+    <ion-card-header>
+      <ion-card-subtitle>
+        Subtitulo
+      </ion-card-subtitle>
+      <ion-card-header>
+        Titulo
+      </ion-card-header>
+    </ion-card-header>
+    <ion-card-content>
+      <img [src]="croppedImage">
+    </ion-card-content>
+  </ion-card> -->
+  <canvas #imageCanvas (mousemove)="moved($event)" (touchmove)="moved($event)"></canvas>
+  <div class="espacio"></div>
+  <!-- <ion-img [src]="myImage"></ion-img> -->
   <ion-footer class="pie">
     <div class="menudiv">
       <ion-button color="dark" expand="block" routerLink="/inicio"><ion-icon name="home"></ion-icon></ion-button>
       <ion-button color="dark" expand="block" routerLink="/lista"><ion-icon name="search"></ion-icon></ion-button>
-      <ion-button color="dark" expand="block" routerLink="/sync"><ion-icon name="sync"></ion-icon></ion-button>
+      <ion-button color="secondary" expand="block" routerLink="/sync"><ion-icon name="analytics"></ion-icon></ion-button>
       <ion-button color="dark" expand="block" routerLink="/nuevo"><ion-icon name="add-circle"></ion-icon></ion-button>
-      <ion-button color="dark" expand="block" routerLink="/home"><ion-icon name="qr-scanner"></ion-icon></ion-button>
+      <ion-button color="dark" expand="block" routerLink="/inventario"><ion-icon name="clipboard"></ion-icon></ion-button>
+      <ion-button color="danger" expand="block" routerLink="/home"><ion-icon name="qr-scanner"></ion-icon></ion-button>
     </div>
-    </ion-footer>
+    </ion-footer> 
 </ion-content>

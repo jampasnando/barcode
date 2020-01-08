@@ -9,3 +9,12 @@
     position: absolute;
     bottom: 0;
 }
+ion-toast.miclase{
+    font-size: 4em;
+}
+ion-button.btnscan{
+    position: relative;
+    top:50%;
+    transform: translateY(-100%);
+    --background:red;
+}

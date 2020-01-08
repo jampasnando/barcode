@@ -1,6 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from "@ionic-native/barcode-scanner/ngx";
-import { IonSearchbar, AlertController, ModalController } from '@ionic/angular';
+import { IonSearchbar, AlertController, ModalController, ToastController } from '@ionic/angular';
 import { ProductosService } from '../service/productos.service';
 import { DetallePage } from './detalle/detalle.page';
 import { File } from '@ionic-native/file/ngx';
@@ -21,7 +21,7 @@ export class HomePage {
   listax:any=[];
   detalle:string;
   public buscar:string="";
-  constructor(private barcode:BarcodeScanner,private consultas:ProductosService,private alertCtrl:AlertController,private modalCtrl:ModalController,private file:File,private router:Router) {}
+  constructor(private barcode:BarcodeScanner,private consultas:ProductosService,private alertCtrl:AlertController,private modalCtrl:ModalController,private file:File,private router:Router,private toast:ToastController) {}
   ngOnInit(){
     
     
@@ -30,15 +30,15 @@ export class HomePage {
 ionViewDidEnter(){
   this.listaprods();
 }
-  scanear(){
-    console.log("entra");
-    this.barcode.scan().then(dato=>{
-      // alert(JSON.stringify(dato));
-      this.buscaprod(dato.text);
-    }).catch(error=>{
-      alert(error);
-    });
-  }
+scanear(){
+  console.log("entra");
+  this.barcode.scan().then(dato=>{
+    // alert(JSON.stringify(dato));
+    this.buscaprod(dato.text);
+  }).catch(error=>{
+    alert(error);
+  });
+}
 
 generafile(lista){
   this.file.writeFile(this.file.dataDirectory, 'lista.txt', lista, {replace: true}).then(_ => console.log('creado')).catch(err => console.log('no creado'));
@@ -87,11 +87,13 @@ listaprods(){
     console.log("desde camara: ",texto);
     this.listax=this.filtrador(texto);
     if(this.listax.length==0){
-      alert("No encontrado");
+      // alert("No encontrado");
+      this.aviso("No encontrado");
       this.scanear();
     }
     else{
       this.vecheck(this.listax[0]);
+      this.aviso(texto);
     }
     
   }
@@ -118,5 +120,16 @@ listaprods(){
       GLOBAL.push(nuevo);
     }
     this.router.navigateByUrl("/inventario");
+  }
+  async aviso(barra){
+    const miaviso=await this.toast.create({
+      message:"LEIDO: "+ barra,
+      duration:1000,
+      position:"middle",
+      // color:'primary'
+      cssClass:"miclase",
+      
+    });
+    miaviso.present();
   }
 }

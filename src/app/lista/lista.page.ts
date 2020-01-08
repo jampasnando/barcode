@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductosService } from '../service/productos.service';
-import { AlertController,IonSearchbar } from '@ionic/angular';
+import { AlertController,IonSearchbar, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { File, FileReader } from '@ionic-native/file/ngx';
 import { GLOBAL } from '../service/global';
@@ -27,7 +27,7 @@ export class ListaPage implements OnInit {
   pordun="medium";
   activo="descripcion";
   // tiqueador=GLOBAL.usuarionombre;
-  constructor(private consultas: ProductosService, private alertCtrl:AlertController, private activatedRoute:ActivatedRoute,private router:Router,private file:File) {
+  constructor(private consultas: ProductosService, private alertCtrl:AlertController, private activatedRoute:ActivatedRoute,private router:Router,private file:File,private toast:ToastController) {
     
    }
 
@@ -89,10 +89,12 @@ export class ListaPage implements OnInit {
     }
     if(bandera=="siexiste"){
       obj.cant++;
+      this.aviso(unitem.descripcion);
     }
     else{
       const nuevo={id: unitem.id, codigoSap: unitem.codigoSap, descripcion: unitem.descripcion, ean13: unitem.ean13, dun14: unitem.dun14,cant:1};
       GLOBAL.push(nuevo);
+      this.aviso(unitem.descripcion);
     }
   }
   // vecheck(item,unemp){
@@ -226,6 +228,17 @@ export class ListaPage implements OnInit {
     this.searchTerm="";
     this.buscador.setFocus();
 
+  }
+  async aviso(descripcion){
+    const miaviso=await this.toast.create({
+      message:"AÑADIDO: "+descripcion,
+      duration:300,
+      position:"middle",
+      // color:'primary'
+      cssClass:"miclase",
+      
+    });
+    miaviso.present();
   }
 }
 interface Listamarcas{

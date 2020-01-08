@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { SyncPageRoutingModule } from './sync-routing.module';
 
 import { SyncPage } from './sync.page';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ImageCropperModule,
     SyncPageRoutingModule
   ],
   declarations: [SyncPage]
